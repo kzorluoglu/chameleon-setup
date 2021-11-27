@@ -1,0 +1,47 @@
+imports:
+   - { resource: config.yml }
+
+parameters:
+  chameleon_system_core.cache.cache_less_files: true
+  chameleon_system_core.cache.allow: true
+  chameleon_system_core.debug.debug_last_order: false
+  chameleon_system_core.cache.memcache_activate: true
+  chameleon_system_core.cache.memcache_use_fallback: false
+  chameleon_system_core.cache.include_cache_delete_trace_info: false
+  chameleon_system_core.debug.show_view_source_html_hints: false
+
+monolog:
+  handlers:
+    main:
+      type: fingers_crossed
+      action_level: error
+      handler: nested
+      excluded_404s:
+        # regex: exclude all 404 errors from the logs
+        - ^/
+    nested:
+      type: stream
+      path: "%kernel.logs_dir%/%kernel.environment%.log"
+      level: debug
+      formatter: chameleon_system_cms_core_log.formatter_with_stacktraces
+    cronjob:
+      type: stream
+      path: "%kernel.logs_dir%/%kernel.environment%.log"
+      channels: ["cronjob"]
+    cronjob_filter:
+      type: filter
+      handler: cronjob
+      max_level: warning
+      min_level: info
+    console:
+      type: console
+      process_psr_3_messages: false
+      channels: ["!event", "!doctrine"]
+    deprecation:
+      type: stream
+      path: "%kernel.logs_dir%/%kernel.environment%.deprecations.log"
+    deprecation_filter:
+      type: filter
+      handler: deprecation
+      max_level: info
+      channels: ["php"]

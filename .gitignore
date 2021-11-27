@@ -1,23 +1,33 @@
-.DS_Store
-node_modules
-/dist
+app/bootstrap.php.cache
+app/cache/*
+!app/cache/.gitkeep
+app/cmsdata/.gitkeep
+!app/cmsdata/.gitkeep
+app/config/parameters.yml
+app/logs/*
+!app/logs/.gitkeep
+behat-parameters.yml
+bin/
+composer.phar
+vendor/
+web/assets/less/chameleon.css
+web/bundles/
+web/chameleon/mediapool/*
+!web/chameleon/mediapool/.gitkeep
+var/
 
+web/chameleon/outbox/*
+!web/chameleon/outbox/static/
+web/chameleon/outbox/static/*
 
-# local env files
-.env.local
-.env.*.local
+!web/chameleon/outbox/static/css/
+web/chameleon/outbox/static/css/*
+!web/chameleon/outbox/static/css/.gitkeep
 
-# Log files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
+!web/chameleon/outbox/static/js/
+web/chameleon/outbox/static/js/*
+!web/chameleon/outbox/static/js/.gitkeep
 
-# Editor directories and files
-.idea
-.vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+!web/chameleon/outbox/static/less/
+web/chameleon/outbox/static/less/*
+!web/chameleon/outbox/static/less/.gitkeep

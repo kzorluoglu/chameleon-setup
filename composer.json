@@ -1,0 +1,60 @@
+{
+    "name": "chameleon-system/chameleon-system",
+    "description": "The Chameleon System",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ESONO AG",
+            "email": "info@chameleonsystem.com",
+            "homepage": "https://www.chameleonsystem.com",
+            "role": "Company"
+        }
+    ],
+    "require": {
+        "chameleon-system/chameleon-shop": "dev-master",
+        "chameleon-system/chameleon-base": "dev-master",
+        "chameleon-system/sanitycheck-bundle": "dev-master",
+        "chameleon-system/sanitycheck": "dev-master",
+        "chameleon-system/chameleon-shop-theme-bundle": "dev-master",
+        "incenteev/composer-parameter-handler": "~2.0",
+        "sensio/framework-extra-bundle": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "@stable"
+    },
+    "autoload": {
+        "classmap": [
+          "app/AppKernel.php",
+          "src/extensions",
+          "src/framework"
+        ],
+        "psr-4": {
+            "AppBundle\\": "src/AppBundle"
+        }
+    },
+    "scripts": {
+        "symfony-scripts": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+          "app/console cache:clear",
+          "app/console assets:install --symlink --relative web"
+        ],
+        "post-install-cmd": [
+            "@symfony-scripts"
+        ],
+        "post-update-cmd": [
+            "@symfony-scripts"
+        ]
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-web-dir": "web",
+        "symfony-assets-install": "relative",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml"
+        }
+    }
+}
