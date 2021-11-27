@@ -1,15 +1,19 @@
 <?php
-
+session_start();
 require 'Interfaces/PageControllerInterface.php';
 require 'Controller/BaseController.php';
 
 class SetupTool
 {
-    const SETUP_TOOL_PATH = __DIR__;
+    public const SETUP_TOOL_PATH = __DIR__;
+    public const PROJECT_PATH = self::SETUP_TOOL_PATH.'/../../';
+    public const COMPOSER_BINARY_PATH = self::SETUP_TOOL_PATH.'/composer.phar';
+    public static $phpBinaryPath;
 
     public function __construct(array $request)
     {
         $this->request = $request;
+        self::$phpBinaryPath = $this->getPHPBinaryPath();
         $this->run();
     }
 
@@ -40,6 +44,15 @@ class SetupTool
 
         require $requiredController;
         return new $pageController($this->request);
+    }
+
+    private function getPHPBinaryPath()
+    {
+        $phpBinaryPath = exec('which php');
+        if ($phpBinaryPath === '') {
+            throw new \Exception('PHP binary not found');
+        }
+        return $phpBinaryPath;
     }
 
 

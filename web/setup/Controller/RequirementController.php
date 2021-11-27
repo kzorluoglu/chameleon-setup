@@ -16,7 +16,7 @@ class RequirementController extends BaseController implements PageControllerInte
 
         $installable = $this->isInstallable($phpVersionRequirements, $this->requiredPhpExtensions);
 
-        $this->render('install', [
+        $this->render('requirement', [
             'title' => 'Requirements',
             'phpVersionRequirements' => $phpVersionRequirements,
             'installable' => $installable,

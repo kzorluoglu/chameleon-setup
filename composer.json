@@ -35,7 +35,6 @@
     },
     "scripts": {
         "symfony-scripts": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
           "app/console cache:clear",
           "app/console assets:install --symlink --relative web"
         ],

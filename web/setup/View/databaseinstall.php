@@ -1,15 +1,11 @@
-<?php
+Importing database structure... Please wait...
 
-/** @var string $title */
-/** @var string $debug */
-
-echo $title; ?>
-<script type="text/javascript">
+     <script type="text/javascript">
 
     document.addEventListener("DOMContentLoaded", function(event) {
 
         var ta = document.getElementById('output');
-        var source = new EventSource('setup?page=composerinstall<?php echo ($debug === '') ? '&debug=true' : '&debug=false'; ?>');
+        var source = new EventSource('setup?page=databaseimport');
         source.addEventListener('message', function(e) {
             if (e.data !== '') {
                 ta.value += e.data + '\n';
@@ -34,9 +30,9 @@ echo $title; ?>
 </script>
 <p>Output:<br/><textarea id="output" style="width: 100%; height: 25em;"></textarea></p>
 
-<a href="setup?page=requirement">< Requirements Check </a> |
+<a href="setup?page=databasevalidation">< Database Validation </a> |
 <div style="display: none" id="nextStep">
     <p>
-        <a href="setup?page=databasevalidation">Database Validation</a>
+        <a href="setup?page=createadmin">Create Admin</a>
     </p>
 </div>

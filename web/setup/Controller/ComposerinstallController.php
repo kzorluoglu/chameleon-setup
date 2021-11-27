@@ -12,14 +12,14 @@ class ComposerinstallController extends BaseController implements PageController
         header('Content-Type: text/event-stream');
         header('Cache-Control: no-cache');
 
-        $this->echoEventData("Start!");
-        $debug = sprintf("Debug Mode: %s", ($this->request['debug'] === 'true') ? 'on' : 'off');
-        $this->echoEventData($debug);
         $composerInstallCommand = $this->getComposerInstallCommand();
 
-        if($this->request['debug'] === 'true') {
+        if( isset($this->request['debug']) && $this->request['debug'] === 'true') {
+            $this->echoEventData("Debug mode is on!");
             $composerInstallCommand = "ping -c 5 google.com";
         }
+
+        $this->echoEventData($composerInstallCommand);
 
         $proc = popen($composerInstallCommand, 'r');
         while (!feof($proc)) {
@@ -28,16 +28,8 @@ class ComposerinstallController extends BaseController implements PageController
         $this->echoEventData("Finish!");
     }
 
-    public function echoEventData($datatext) {
-        echo "data: ".implode("\ndata: ", explode("\n", $datatext))."\n\n";
-    }
-
     public function getComposerInstallCommand(): string
     {
-        $projectPath = SetupTool::SETUP_TOOL_PATH.'/../../';
-        $getPhpBinaryPath = shell_exec('which php');
-        $composer = SetupTool::SETUP_TOOL_PATH.'/composer.phar';
-
-        return sprintf('cd %s && %s %s install', $projectPath, $getPhpBinaryPath, $composer);
+        return sprintf('cd %s && %s %s install 2>&1', SetupTool::PROJECT_PATH, SetupTool::$phpBinaryPath, SetupTool::COMPOSER_BINARY_PATH);
     }
 }

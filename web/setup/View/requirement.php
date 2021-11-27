@@ -17,6 +17,8 @@ Extension <?php echo $requirement['name']; ?>, <?php if($requirement['passed']):
 <?php endforeach; ?>
 <hr>
 
+<a href="setup">< Home</a>
+
 <?php if($installable): ?>
 <a href="setup?page=install">Go to Install</a>
 <?php endif; ?>

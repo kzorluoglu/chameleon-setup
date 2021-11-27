@@ -10,9 +10,36 @@ class BaseController
         $this->request = $request;
     }
 
-    public function render($view, $data = [])
+    public function render($view, $data = []): void
     {
         extract($data);
         require_once SetupTool::SETUP_TOOL_PATH.'/View/' . $view . '.php';
+    }
+
+    protected function getPDO(string $hostname, string $port, string $databaseName, string $username, string $password): PDO
+    {
+        $pdoConenctionString = sprintf(
+            'mysql:host=%s:%s;dbname=%s',
+            $hostname,
+            $port,
+            $databaseName
+        );
+
+        return new \PDO(
+            $pdoConenctionString,
+            $username,
+            $password,
+            [PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]
+        );
+    }
+
+    protected function redirect(string $string): void
+    {
+        header("Location: $string");
+        exit;
+    }
+
+    public function echoEventData($datatext) {
+        echo "data: ".implode("\ndata: ", explode("\n", $datatext))."\n\n";
     }
 }
