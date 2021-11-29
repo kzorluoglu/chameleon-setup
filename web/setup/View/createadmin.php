@@ -1,3 +1,5 @@
+Last Step:<br>
+
  <?php if($error !== ''): ?>
  Error: Please check the error information<br>
  <p class="error">Detail: <?php echo $error; ?></p>
@@ -14,6 +16,9 @@
      <button type="submit">Create</button>
  </form>
 
-<?php if($created): ?>
+ <a href="setup?page=checkconfig">< Modify/Check Config</a>
+
+
+ <?php if($created): ?>
 <a href="<?php echo $_SERVER['HTTP_ORIGIN']; ?>">Enjoy</a>
 <?php endif; ?>

@@ -33,6 +33,6 @@ Importing database structure... Please wait...
 <a href="setup?page=databasevalidation">< Database Validation </a> |
 <div style="display: none" id="nextStep">
     <p>
-        <a href="setup?page=createadmin">Create Admin</a>
+        <a href="setup?page=checkconfig">Modify/Check Config</a>
     </p>
 </div>
