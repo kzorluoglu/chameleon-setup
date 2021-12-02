@@ -25,7 +25,7 @@ class ComposerinstallController extends BaseController implements PageController
         while (!feof($proc)) {
             $this->echoEventData(fread($proc, 4096));
         }
-        $this->echoEventData("Finish!");
+        $this->echoEventData("Done!");
     }
 
     public function getComposerInstallCommand(): string

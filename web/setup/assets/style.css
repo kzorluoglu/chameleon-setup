@@ -1,3 +1,6 @@
+html {
+    scroll-behavior: smooth;
+}
 body {
     margin-top: 20px;
     background: #f6f9fc;
@@ -31,10 +34,19 @@ body {
     right: 0;
 }
 .text-theme {
-    color: #5369f8 !important;
+    color: rgb(114, 192, 44) !important;
 }
 .btn-theme {
     background-color: #5369f8;
     border-color: #5369f8;
     color: #fff;
+}
+
+.terminal .body {
+    background: black;
+    color: #7AFB4C;
+    padding: 8px;
+    overflow: auto;
+    font-size: 0.5rem;
+    min-height: 300px;
 }

@@ -9,6 +9,7 @@ app/logs/*
 behat-parameters.yml
 bin/
 composer.phar
+!web/setup/composer.phar
 vendor/
 web/assets/less/chameleon.css
 web/bundles/

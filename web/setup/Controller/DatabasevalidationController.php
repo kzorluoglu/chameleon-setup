@@ -38,7 +38,7 @@ class DatabasevalidationController extends BaseController implements PageControl
             return $this->getPDO(
                 $this->request['mysql_host'],
                 $this->request['mysql_port'],
-                $this->request['mysql_databaseName'],
+                $this->request['mysql_database_name'],
                 $this->request['mysql_username'],
                 $this->request['mysql_password'],
             );

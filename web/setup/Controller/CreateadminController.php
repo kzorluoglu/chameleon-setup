@@ -14,7 +14,7 @@ class CreateadminController extends BaseController implements PageControllerInte
             $pdo = $this->getPDO(
                 $_SESSION['mysql_information']['mysql_host'],
                 $_SESSION['mysql_information']['mysql_port'],
-                $_SESSION['mysql_information']['mysql_databaseName'],
+                $_SESSION['mysql_information']['mysql_database_name'],
                 $_SESSION['mysql_information']['mysql_username'],
                 $_SESSION['mysql_information']['mysql_password'],
             );
@@ -72,7 +72,7 @@ class CreateadminController extends BaseController implements PageControllerInte
      VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s',
              '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
             $userId,
-            1,
+            2,
             $email,
             $username,
             $password,

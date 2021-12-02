@@ -14,13 +14,15 @@ class RequirementController extends BaseController implements PageControllerInte
             'passed' => (PHP_VERSION >= $this->requiredPhpVersion),
         ];
 
-        $installable = $this->isInstallable($phpVersionRequirements, $this->requiredPhpExtensions);
+        $installedPhpExtensions = $this->checkSystemRequirementsStep();
+
+        $installable = $this->isInstallable($phpVersionRequirements, $installedPhpExtensions);
 
         $this->render('requirement', [
             'title' => 'Requirements',
             'phpVersionRequirements' => $phpVersionRequirements,
             'installable' => $installable,
-            'system_requirements' => $this->checkSystemRequirementsStep(),
+            'system_requirements' => $installedPhpExtensions,
         ]);
     }
 
@@ -41,7 +43,7 @@ class RequirementController extends BaseController implements PageControllerInte
     {
         $installable = $phpVersionRequirements['passed'];
         foreach ($requiredPhpExtensions as $requiredPhpExtension) {
-            if(extension_loaded($requiredPhpExtension) === false) {
+            if($requiredPhpExtension['passed'] === false) {
                 $installable = false;
                 continue;
             }

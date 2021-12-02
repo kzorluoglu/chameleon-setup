@@ -82,7 +82,7 @@ class CheckconfigController extends BaseController implements PageControllerInte
         $configs  = (array)$this->getConfigs();
         $configs['parameters']['database_host'] = $_SESSION['mysql_information']['mysql_host'];
         $configs['parameters']['database_port'] = $_SESSION['mysql_information']['mysql_port'];
-        $configs['parameters']['database_name'] = $_SESSION['mysql_information']['mysql_databaseName'];
+        $configs['parameters']['database_name'] = $_SESSION['mysql_information']['mysql_database_name'];
         $configs['parameters']['database_user'] = $_SESSION['mysql_information']['mysql_username'];
         $configs['parameters']['database_password'] = $_SESSION['mysql_information']['mysql_password'];
         $this->configs = new ArrayIterator($configs);

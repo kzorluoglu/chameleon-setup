@@ -1,18 +1,73 @@
-Importing database structure... Please wait...
+<?php include "layout/header.php"; ?>
+<div class="card border-0">
+    <div class="card-body p-0">
+        <div class="row no-gutters">
+            <div class="col-lg-12">
+                <div class="p-5">
+                    <div class="mb-5">
+                        <span class="badge bg-secondary">Step 5</span>
+                        <h3 class="h4 font-weight-bold text-theme">Database Installation</h3>
+                    </div>
+                    <h6 class="h5 mb-0" id="please_wait_text_container">Please wait...</h6>
+                    <div class="terminal">
+                        <textarea id="output" class="body form-control"></textarea>
+                    </div>
 
-     <script type="text/javascript">
+                    <div class="mt-5">
+
+                        <p class="text-success mt-2 mb-5 invisible" id="success_message">Database imported completed.</p>
+
+
+                        <a class="btn btn-outline-info" href="setup?page=databasevalidation">
+                            <i class="bi bi-arrow-left-square"></i>
+                            Database Validation
+                        </a>
+                        <a class="btn btn-primary invisible" id="nextStep" href="setup?page=checkconfig">
+                            <i class="bi bi-arrow-right-square"></i>
+                            Modify/Check Config
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end card-body -->
+</div>
+<!-- end card -->
+
+<?php include "layout/footer.php"; ?>
+
+
+
+<script type="text/javascript">
 
     document.addEventListener("DOMContentLoaded", function(event) {
 
         var ta = document.getElementById('output');
+
+        var scrollToBottomInterval = setInterval(function(){
+            ta.scrollTop = ta.scrollHeight;
+        }, 10);
+
         var source = new EventSource('setup?page=databaseimport');
         source.addEventListener('message', function(e) {
             if (e.data !== '') {
                 ta.value += e.data + '\n';
 
-                if (e.data === 'Finish!') {
+                if (e.data === 'Done!') {
+
                     var nextStepContainer = document.getElementById('nextStep');
-                    nextStepContainer.style.display =  'block';
+                    nextStepContainer.classList.remove('invisible');
+                    nextStepContainer.classList.add('visible');
+
+                    var successMessageContainer = document.getElementById('success_message');
+                    successMessageContainer.classList.remove('invisible');
+                    successMessageContainer.classList.add('visible');
+
+                    document.getElementById('please_wait_text_container').innerText = '';
+
+                    clearInterval(scrollToBottomInterval);
                 }
             }
         }, false);
@@ -20,19 +75,5 @@ Importing database structure... Please wait...
             source.close();
         }, false);
 
-        var textarea = document.getElementById('output');
-        setInterval(function(){
-            textarea.scrollTop = textarea.scrollHeight;
-        }, 10);
-
-
-        });
+    });
 </script>
-<p>Output:<br/><textarea id="output" style="width: 100%; height: 25em;"></textarea></p>
-
-<a href="setup?page=databasevalidation">< Database Validation </a> |
-<div style="display: none" id="nextStep">
-    <p>
-        <a href="setup?page=checkconfig">Modify/Check Config</a>
-    </p>
-</div>
