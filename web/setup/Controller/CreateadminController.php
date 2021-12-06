@@ -104,9 +104,11 @@ class CreateadminController extends BaseController implements PageControllerInte
 
         try {
             $statement->execute();
+            $pdo->commit();
 
             return true;
         } catch (\PDOException $e) {
+            $pdo->rollBack();
             return $e;
         }
     }
