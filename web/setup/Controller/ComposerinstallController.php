@@ -29,6 +29,6 @@ class ComposerinstallController extends BaseController implements PageController
 
     public function getComposerInstallCommand(): string
     {
-        return sprintf('cd %s && %s %s install 2>&1', SetupTool::PROJECT_PATH, SetupTool::$phpBinaryPath, SetupTool::COMPOSER_BINARY_PATH);
+        return sprintf('export COMPOSER_HOME=/tmp && cd %s && %s %s install 2>&1', SetupTool::PROJECT_PATH, SetupTool::$phpBinaryPath, SetupTool::COMPOSER_BINARY_PATH);
     }
 }
