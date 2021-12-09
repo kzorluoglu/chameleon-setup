@@ -54,7 +54,7 @@
 
                     <div class="mt-5">
 
-                        <a class="btn btn-outline-info" href="setup?page=install">
+                        <a class="btn btn-outline-info" href="index.php?page=install">
                             <i class="bi bi-arrow-left-square"></i>
                             Install
                         </a>

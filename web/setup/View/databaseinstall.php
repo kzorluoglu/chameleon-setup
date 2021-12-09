@@ -18,11 +18,11 @@
                         <p class="text-success mt-2 mb-5 invisible" id="success_message">Database imported completed.</p>
 
 
-                        <a class="btn btn-outline-info" href="setup?page=databasevalidation">
+                        <a class="btn btn-outline-info" href="index.php?page=databasevalidation">
                             <i class="bi bi-arrow-left-square"></i>
                             Database Validation
                         </a>
-                        <a class="btn btn-primary invisible" id="nextStep" href="setup?page=checkconfig">
+                        <a class="btn btn-primary invisible" id="nextStep" href="index.php?page=checkconfig">
                             <i class="bi bi-arrow-right-square"></i>
                             Modify/Check Config
                         </a>
@@ -42,18 +42,22 @@
 
 <script type="text/javascript">
 
+    function scrollTOutputBottom(output) {
+        output.scrollTop = output.scrollHeight;
+    }
+
     document.addEventListener("DOMContentLoaded", function(event) {
 
-        var ta = document.getElementById('output');
+        var output = document.getElementById('output');
 
         var scrollToBottomInterval = setInterval(function(){
-            ta.scrollTop = ta.scrollHeight;
+            scrollTOutputBottom(output)
         }, 10);
 
-        var source = new EventSource('setup?page=databaseimport');
+        var source = new EventSource('index.php?page=databaseimport');
         source.addEventListener('message', function(e) {
             if (e.data !== '') {
-                ta.value += e.data + '\n';
+                output.value += e.data + '\n';
 
                 if (e.data === 'Done!') {
 
@@ -66,6 +70,8 @@
                     successMessageContainer.classList.add('visible');
 
                     document.getElementById('please_wait_text_container').innerText = '';
+
+                    scrollTOutputBottom(output);
 
                     clearInterval(scrollToBottomInterval);
                 }

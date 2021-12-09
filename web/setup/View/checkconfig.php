@@ -1,7 +1,3 @@
-
-
-
-
 <?php include "layout/header.php"; ?>
 <div class="card border-0">
     <div class="card-body p-0">
@@ -68,12 +64,12 @@
 
                     <div class="mt-5">
 
-                        <a class="btn btn-outline-info" href="setup?page=databaseinstall">
+                        <a class="btn btn-outline-info" href="index.php?page=databaseinstall">
                             <i class="bi bi-arrow-left-square"></i>
                             Database Installation
                         </a>
                         <?php if($checked === true): ?>
-                            <a class="btn btn-primary" href="setup?page=createadmin">
+                            <a class="btn btn-primary" href="index.php?page=createadmin">
                                 <i class="bi bi-arrow-right-square"></i>
                                 Create Admin User
                             </a>
@@ -87,4 +83,3 @@
     <!-- end card-body -->
 </div>
 <!-- end card -->
-

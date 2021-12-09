@@ -11,7 +11,6 @@ class DatabaseimportController extends BaseController implements PageControllerI
             $this->redirect('setup?page=databasevalidation');
         }
 
-        ob_end_flush();
         ini_set("output_buffering", "0");
         ob_implicit_flush(true);
         header('Content-Type: text/event-stream');

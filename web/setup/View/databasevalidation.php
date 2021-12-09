@@ -65,12 +65,12 @@
 
                      <div class="mt-5">
 
-                         <a class="btn btn-outline-info" href="setup?page=install">
+                         <a class="btn btn-outline-info" href="index.php?page=install">
                              <i class="bi bi-arrow-left-square"></i>
                              Install
                          </a>
                          <?php if($connected === true): ?>
-                             <a class="btn btn-primary" href="setup?page=databaseinstall">
+                             <a class="btn btn-primary" href="index.php?page=databaseinstall">
                              <i class="bi bi-arrow-right-square"></i>
                              Database Installation
                          </a>

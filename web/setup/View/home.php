@@ -12,7 +12,7 @@
                     <br>
                     <p class="text-muted mt-2 mb-5">with Chameleon you no longer have to decide whether you want to use an online shop with a CMS function or a CMS with a shop module - you get both together in one package - without any compromises.</p>
 
-                    <a class="btn btn-primary" href="setup?page=requirement"> <i class="bi bi-forward-fill"></i> Check System requirements</a>
+                    <a class="btn btn-primary" href="index.php?page=requirement"> <i class="bi bi-forward-fill"></i> Check System requirements</a>
 
                 </div>
             </div>

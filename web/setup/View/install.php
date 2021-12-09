@@ -15,11 +15,11 @@
 
                     <div class="mt-5">
 
-                    <a class="btn btn-outline-info" href="setup?page=requirement">
+                    <a class="btn btn-outline-info" href="index.php?page=requirement">
                         <i class="bi bi-arrow-left-square"></i>
                         System Requirements
                     </a>
-                    <a class="btn btn-primary invisible" id="nextStep" href="setup?page=databasevalidation">
+                    <a class="btn btn-primary invisible" id="nextStep" href="index.php?page=databasevalidation">
                         <i class="bi bi-arrow-right-square"></i>
                         Database Validation
                     </a>
@@ -35,28 +35,39 @@
 
 <?php include "layout/footer.php"; ?>
 
-
+<?php
+/**
+ * InstallController::index
+ * @var string $debug
+ */
+?>
 
 <script type="text/javascript">
 
+    function scrollTOutputBottom(output) {
+        output.scrollTop = output.scrollHeight;
+    }
+
     document.addEventListener("DOMContentLoaded", function(event) {
 
-        var ta = document.getElementById('output');
+        var output = document.getElementById('output');
 
         var scrollToBottomInterval = setInterval(function(){
-            ta.scrollTop = ta.scrollHeight;
+            scrollTOutputBottom(output);
         }, 10);
 
-        var source = new EventSource('setup?page=composerinstall<?php echo ($debug === '') ? '&debug=true' : '&debug=false'; ?>');
+        var source = new EventSource('index.php?page=composerinstall<?php echo ($debug === '') ? '&debug=true' : '&debug=false'; ?>');
         source.addEventListener('message', function(e) {
             if (e.data !== '') {
-                ta.value += e.data + '\n';
+                output.value += e.data + '\n';
 
                 if (e.data === 'Done!') {
 
                     var nextStepContainer = document.getElementById('nextStep');
                     nextStepContainer.classList.remove('invisible');
                     nextStepContainer.classList.add('visible');
+
+                    scrollTOutputBottom(output);
 
                     clearInterval(scrollToBottomInterval);
                 }

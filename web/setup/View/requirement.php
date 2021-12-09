@@ -44,11 +44,11 @@
                                 after completing the required items from the list.</p>
                         <?php endif; ?>
 
-                        <a class="btn btn-outline-info" href="setup?page=install">
+                        <a class="btn btn-outline-info" href="index.php?page=install">
                             <i class="bi bi-arrow-left-square"></i>
                             Home</a>
                         <?php if ($installable): ?>
-                            <a class="btn btn-primary" href="setup?page=install">
+                            <a class="btn btn-primary" href="index.php?page=install">
                                 <i class="bi bi-arrow-right-square"></i>
                                 Install</a>
                         <?php endif; ?>
