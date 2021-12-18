@@ -4,7 +4,7 @@ class RequirementController extends BaseController implements PageControllerInte
 {
 
     private float $requiredPhpVersion = 7.4;
-    private array $requiredPhpExtensions = [ 'curl', 'memcached', 'mbstring', 'mysqli', 'pdo_mysql', 'zip', 'tidy'];
+    private array $requiredPhpExtensions = [ 'curl', /*'memcached',*/ 'mbstring', 'mysqli', 'pdo_mysql', 'zip', 'tidy'];
 
     public function index(): void
     {

@@ -6,8 +6,8 @@ class DatabaseimportController extends BaseController implements PageControllerI
 
     public function index(): void
     {
-
-        if(isset($_SESSION['mysql_information']) === false) {
+        $mysqlInformation = $_SESSION['mysql_information'];
+        if(isset($mysqlInformation) === false) {
             $this->redirect('setup?page=databasevalidation');
         }
 
@@ -16,37 +16,42 @@ class DatabaseimportController extends BaseController implements PageControllerI
         header('Content-Type: text/event-stream');
         header('Cache-Control: no-cache');
 
-        $pdo = $this->getPDO(
-            $_SESSION['mysql_information']['mysql_host'],
-            $_SESSION['mysql_information']['mysql_port'],
-            $_SESSION['mysql_information']['mysql_database_name'],
-            $_SESSION['mysql_information']['mysql_username'],
-            $_SESSION['mysql_information']['mysql_password'],
-        );
+        try {
+            $pdo = $this->getPDO(
+                $mysqlInformation['mysql_host'],
+                $mysqlInformation['mysql_port'],
+                $mysqlInformation['mysql_database_name'],
+                $mysqlInformation['mysql_username'],
+                $mysqlInformation['mysql_password'],
+            );
+        } catch (PDOException $e) {
+            $this->echoEventData($e->getMessage());
+            exit();
+        }
 
-        $databaseFile = $this->readDatabaseFile();
+        $databaseFile = $this->readDatabaseFile($mysqlInformation['install_demo_data']);
 
         $this->echoEventData("Database import started");
         $sqlLines = explode(";\n", $databaseFile);
-        $errorMessages = [];
         foreach ($sqlLines as $key => $val) {
             try {
                 $this->echoEventData($val);
                 $pdo->exec($val);
             }catch (\PDOException $e) {
                 $this->echoEventData("Error: ".$e->getMessage());
+                exit();
             }
         }
 
-        if(\count($errorMessages) === 0) {
-            $this->echoEventData("Done!");
-        }
-
+        $this->echoEventData("Done!");
     }
 
-    private function readDatabaseFile()
+    private function readDatabaseFile(bool $installDemoData): string
     {
         $path = SetupTool::SETUP_TOOL_PATH."/Database/shop-database.sql";
+        if($installDemoData === true) {
+            $path = SetupTool::SETUP_TOOL_PATH."/Database/shop-database-with-demo-data.sql";
+        }
         if(false === file_exists($path)) {
             throw new \Exception(sprintf("Database file (%s) not found.", $path));
         }

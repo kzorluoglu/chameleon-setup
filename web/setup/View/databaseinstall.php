@@ -35,10 +35,7 @@
     <!-- end card-body -->
 </div>
 <!-- end card -->
-
 <?php include "layout/footer.php"; ?>
-
-
 
 <script type="text/javascript">
 
@@ -54,7 +51,7 @@
             scrollTOutputBottom(output)
         }, 10);
 
-        var source = new EventSource('index.php?page=databaseimport');
+        var source = new EventSource('<?php echo $full_url; ?>?page=databaseimport');
         source.addEventListener('message', function(e) {
             if (e.data !== '') {
                 output.value += e.data + '\n';
