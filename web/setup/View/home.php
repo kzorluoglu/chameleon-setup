@@ -1,4 +1,5 @@
-<?php include "layout/header.php"; ?>
+<?php
+include "layout/header.php"; ?>
 <div class="card border-0">
     <div class="card-body p-0">
         <div class="row no-gutters">
@@ -12,7 +13,7 @@
                     <br>
                     <p class="text-muted mt-2 mb-5">with Chameleon you no longer have to decide whether you want to use an online shop with a CMS function or a CMS with a shop module - you get both together in one package - without any compromises.</p>
 
-                    <a class="btn btn-primary" href="setup?page=requirement"> <i class="bi bi-forward-fill"></i> Check System requirements</a>
+                    <a class="btn btn-primary" href="<?php echo $full_url; ?>?page=requirement"> <i class="bi bi-forward-fill"></i> Check System requirements</a>
 
                 </div>
             </div>

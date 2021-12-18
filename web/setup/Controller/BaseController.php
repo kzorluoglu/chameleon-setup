@@ -12,6 +12,7 @@ class BaseController
 
     public function render($view, $data = []): void
     {
+        $data['full_url'] = $this->getFullUrl();
         extract($data);
         require_once SetupTool::SETUP_TOOL_PATH.'/View/' . $view . '.php';
     }
@@ -41,5 +42,10 @@ class BaseController
 
     public function echoEventData($datatext) {
         echo "data: ".implode("\ndata: ", explode("\n", $datatext))."\n\n";
+    }
+
+    private function getFullUrl()
+    {
+        return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[SCRIPT_NAME]";
     }
 }

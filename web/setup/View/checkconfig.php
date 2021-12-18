@@ -68,12 +68,12 @@
 
                     <div class="mt-5">
 
-                        <a class="btn btn-outline-info" href="setup?page=databaseinstall">
+                        <a class="btn btn-outline-info" href="<?php echo $full_url; ?>?page=databaseinstall">
                             <i class="bi bi-arrow-left-square"></i>
                             Database Installation
                         </a>
                         <?php if($checked === true): ?>
-                            <a class="btn btn-primary" href="setup?page=createadmin">
+                            <a class="btn btn-primary" href="<?php echo $full_url; ?>?page=createadmin">
                                 <i class="bi bi-arrow-right-square"></i>
                                 Create Admin User
                             </a>

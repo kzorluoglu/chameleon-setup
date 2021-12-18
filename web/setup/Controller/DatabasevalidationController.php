@@ -8,22 +8,27 @@ class DatabasevalidationController extends BaseController implements PageControl
         $connected = false;
         $error = '';
 
+        $databaseInformation = $this->getDatabaseInformation();
+
         if ($_POST) {
             $dbConnection = $this->validateDatabaseConnection();
 
             if ($dbConnection instanceof PDO) {
                 $connected = true;
-                $_SESSION['mysql_information'] = $this->request;
+                $this->setSessionDatabaseInformation($this->request);
             }
 
             if ($dbConnection instanceof PDOException) {
                 $connected = false;
                 $error = $dbConnection->getMessage();
             }
+
+            $databaseInformation = $this->getDatabaseInformation();
         }
 
         $this->render('databasevalidation', [
             'dbConnection' => $dbConnection ?? false,
+            'databaseInformation' => $databaseInformation,
             'connected' => $connected,
             'error' => $error,
         ]);
@@ -45,5 +50,34 @@ class DatabasevalidationController extends BaseController implements PageControl
         } catch (\PDOException $e) {
             return $e;
         }
+    }
+
+    /** @return null|array */
+    private function hasSessionDatabaseInformation(): ?array
+    {
+        return $_SESSION['mysql_information'];
+    }
+
+    private function setSessionDatabaseInformation(array $request): void
+    {
+        $_SESSION['mysql_information'] = $request;
+    }
+
+    private function getDatabaseInformation()
+    {
+        $databaseInformation = $this->hasSessionDatabaseInformation();
+
+        if ($databaseInformation !== null) {
+            return $databaseInformation;
+        }
+
+        return [
+            'mysql_host' => '',
+            'mysql_port' => '',
+            'mysql_database_name' => '',
+            'mysql_username' => '',
+            'mysql_password' => '',
+            'install_demo_data' => '',
+        ];
     }
 }

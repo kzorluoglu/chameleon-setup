@@ -18,11 +18,11 @@
                         <p class="text-success mt-2 mb-5 invisible" id="success_message">Database imported completed.</p>
 
 
-                        <a class="btn btn-outline-info" href="setup?page=databasevalidation">
+                        <a class="btn btn-outline-info" href="<?php echo $full_url; ?>?page=databasevalidation">
                             <i class="bi bi-arrow-left-square"></i>
                             Database Validation
                         </a>
-                        <a class="btn btn-primary invisible" id="nextStep" href="setup?page=checkconfig">
+                        <a class="btn btn-primary invisible" id="nextStep" href="<?php echo $full_url; ?>?page=checkconfig">
                             <i class="bi bi-arrow-right-square"></i>
                             Modify/Check Config
                         </a>

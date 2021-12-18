@@ -15,11 +15,11 @@
 
                     <div class="mt-5">
 
-                    <a class="btn btn-outline-info" href="setup?page=requirement">
+                    <a class="btn btn-outline-info" href="<?php echo $full_url; ?>?page=requirement">
                         <i class="bi bi-arrow-left-square"></i>
                         System Requirements
                     </a>
-                    <a class="btn btn-primary invisible" id="nextStep" href="setup?page=databasevalidation">
+                    <a class="btn btn-primary invisible" id="nextStep" href="<?php echo $full_url; ?>?page=databasevalidation">
                         <i class="bi bi-arrow-right-square"></i>
                         Database Validation
                     </a>
@@ -47,7 +47,7 @@
             ta.scrollTop = ta.scrollHeight;
         }, 10);
 
-        var source = new EventSource('setup?page=composerinstall<?php echo ($debug === '') ? '&debug=true' : '&debug=false'; ?>');
+        var source = new EventSource('<?php echo $full_url; ?>?page=composerinstall<?php echo ($debug === '') ? '&debug=true' : '&debug=false'; ?>');
         source.addEventListener('message', function(e) {
             if (e.data !== '') {
                 ta.value += e.data + '\n';

@@ -10,9 +10,9 @@
     <!-- Bootstrap Icon CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <!-- Setup Tool CSS -->
-    <link href="setup/assets/style.css" rel="stylesheet" >
+    <link href="<?php echo $full_url; ?>/assets/style.css" rel="stylesheet" >
 
-    <title>Hello, world!</title>
+    <title>Chameleon System Setup Tool</title>
 </head>
 <body>
 <div id="main-wrapper" class="container">
