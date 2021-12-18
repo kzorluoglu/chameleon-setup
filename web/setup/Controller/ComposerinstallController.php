@@ -6,7 +6,6 @@ class ComposerinstallController extends BaseController implements PageController
 
     public function index(): void
     {
-        ob_end_flush();
         ini_set("output_buffering", "0");
         ob_implicit_flush(true);
         header('Content-Type: text/event-stream');
@@ -30,6 +29,6 @@ class ComposerinstallController extends BaseController implements PageController
 
     public function getComposerInstallCommand(): string
     {
-        return sprintf('cd %s && %s %s install 2>&1', SetupTool::PROJECT_PATH, SetupTool::$phpBinaryPath, SetupTool::COMPOSER_BINARY_PATH);
+        return sprintf('export COMPOSER_HOME=/tmp && cd %s && %s %s install 2>&1', SetupTool::PROJECT_PATH, SetupTool::$phpBinaryPath, SetupTool::COMPOSER_BINARY_PATH);
     }
 }

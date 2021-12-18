@@ -8,7 +8,7 @@ class DatabaseinstallController extends BaseController implements PageController
     {
 
         if(isset($_SESSION['mysql_information']) === false) {
-            $this->redirect('setup?page=databasevalidation');
+            $this->redirect('index.php?page=databasevalidation');
         }
 
         $this->render('databaseinstall');

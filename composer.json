@@ -18,7 +18,8 @@
         "chameleon-system/sanitycheck": "dev-master",
         "chameleon-system/chameleon-shop-theme-bundle": "dev-master",
         "incenteev/composer-parameter-handler": "~2.0",
-        "sensio/framework-extra-bundle": "*"
+        "sensio/framework-extra-bundle": "*",
+        "ext-pdo": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "@stable"
@@ -34,10 +35,6 @@
         }
     },
     "scripts": {
-        "symfony-scripts": [
-          "app/console cache:clear",
-          "app/console assets:install --symlink --relative web"
-        ],
         "post-install-cmd": [
             "@symfony-scripts"
         ],

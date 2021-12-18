@@ -2,8 +2,6 @@
 
 use Symfony\Component\Yaml\Yaml;
 
-require_once SetupTool::SETUP_TOOL_PATH.'/../../vendor/autoload.php';
-
 class CheckconfigController extends BaseController implements PageControllerInterface
 {
 
@@ -15,6 +13,8 @@ class CheckconfigController extends BaseController implements PageControllerInte
     public function __construct(array $request)
     {
         parent::__construct($request);
+
+        $this->requireComposerAutoloader();
 
         if(empty($this->configs) === true) {
             $this->createConfigs();
@@ -95,10 +95,7 @@ class CheckconfigController extends BaseController implements PageControllerInte
 
     public function saveConfig(): bool
     {
-        /** remove default page from request array */
-        unset($this->request['page']);
-
-        $configArray = $this->preparePostedConfigs();
+        $configArray = $this->preparePostedConfigs($_POST);
         $newYamlDump = Yaml::dump($configArray);
         $saved = file_put_contents(self::PARAMETERS_YAML_FILE_PATH, $newYamlDump);
 
@@ -108,10 +105,10 @@ class CheckconfigController extends BaseController implements PageControllerInte
         return true;
     }
 
-    private function preparePostedConfigs(): array
+    private function preparePostedConfigs(array $postedConfigs): array
     {
         $configArray = [];
-        foreach ($this->request as $key => $value) {
+        foreach ($postedConfigs as $key => $value) {
             if (is_array($value) === false) {
                 $configArray[$key] = $value;
                 continue;
@@ -124,5 +121,10 @@ class CheckconfigController extends BaseController implements PageControllerInte
         }
 
         return $configArray;
+    }
+
+    private function requireComposerAutoloader()
+    {
+        require_once SetupTool::SETUP_TOOL_PATH.'/../../vendor/autoload.php';
     }
 }
