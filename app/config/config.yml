@@ -18,7 +18,8 @@ doctrine:
     dbname:         '%database_name%'
     user:           '%database_user%'
     password:       '%database_password%'
-    driver:         'pdo_mysql'
+    driver:         '%database_driver%'
+    path:           '%database_path%'
     server_version: '5.7'
     charset:        'utf8'
     default_table_options:

@@ -8,12 +8,13 @@ class ComposerinstallController extends BaseController implements PageController
     {
         ini_set("output_buffering", "0");
         ob_implicit_flush(true);
+        header("Access-Control-Allow-Origin: *");
         header('Content-Type: text/event-stream');
         header('Cache-Control: no-cache');
 
         $composerInstallCommand = $this->getComposerInstallCommand();
 
-        if( isset($this->request['debug']) && $this->request['debug'] === 'true') {
+        if (isset($this->request['debug']) && $this->request['debug'] === 'true') {
             $this->echoEventData("Debug mode is on!");
             $composerInstallCommand = "ping -c 5 google.com";
         }

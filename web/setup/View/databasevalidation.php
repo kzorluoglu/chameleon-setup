@@ -34,6 +34,22 @@
                      <?php if($connected === false): ?>
                      <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
                          <div class="row mb-3">
+                             <label for="database_driver" class="col-sm-4 col-form-label">Database Driver</label>
+                             <div class="col-sm-8">
+                                 <input type="text" name="mysql_host"
+                                        value="<?php echo $databaseInformation['database_driver'] ?? ''; ?>"
+                                        class="form-control" id="database_driver" autocomplete="database_driver">
+                             </div>
+                         </div>
+                         <div class="row mb-3">
+                             <label for="database_path" class="col-sm-4 col-form-label">Database Path</label>
+                             <div class="col-sm-8">
+                                 <input type="text" name="mysql_host"
+                                        value="<?php echo $databaseInformation['database_path'] ?? ''; ?>"
+                                        class="form-control" id="database_path" autocomplete="database_path">
+                             </div>
+                         </div>
+                         <div class="row mb-3">
                              <label for="mysql_host" class="col-sm-4 col-form-label">Database Hostname</label>
                              <div class="col-sm-8">
                                  <input type="text" name="mysql_host"

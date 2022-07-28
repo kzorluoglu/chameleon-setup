@@ -3,6 +3,8 @@ parameters:
     chameleon_system_core.debug.show_view_source_html_hints: true
     chameleon_system_core.development_email: "the developer's mail address"
 
+    database_driver: "mysql"
+    database_path: "%kernel.root_dir%/var/app.db"
     database_host: "localhost"
     database_port: 3306
     database_name: "shp_dmo61"

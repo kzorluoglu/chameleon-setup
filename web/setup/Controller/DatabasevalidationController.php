@@ -25,7 +25,6 @@ class DatabasevalidationController extends BaseController implements PageControl
 
         }
 
-        $connected = true;
 
         $this->render('databasevalidation', [
             'dbConnection' => $dbConnection ?? false,

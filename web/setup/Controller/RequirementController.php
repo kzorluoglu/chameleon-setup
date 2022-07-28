@@ -4,7 +4,9 @@ class RequirementController extends BaseController implements PageControllerInte
 {
 
     private float $requiredPhpVersion = 7.4;
-    private array $requiredPhpExtensions = [ 'curl', /*'memcached',*/ 'mbstring', 'mysqli', 'pdo_mysql', 'zip', 'tidy'];
+    private array $requiredPhpExtensions = ['curl', /*'memcached',*/
+        'mbstring', 'mysqli', 'pdo_mysql', 'zip', 'tidy'];
+
 
     public function index(): void
     {
@@ -18,12 +20,14 @@ class RequirementController extends BaseController implements PageControllerInte
 
         $installable = $this->isInstallable($phpVersionRequirements, $installedPhpExtensions);
 
-        $this->render('requirement', [
-            'title' => 'Requirements',
+        header("Access-Control-Allow-Origin: *");
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode([
             'phpVersionRequirements' => $phpVersionRequirements,
             'installable' => $installable,
             'system_requirements' => $installedPhpExtensions,
-        ]);
+        ], JSON_PRETTY_PRINT);
+        exit;
     }
 
     public function checkSystemRequirementsStep()
@@ -43,7 +47,7 @@ class RequirementController extends BaseController implements PageControllerInte
     {
         $installable = $phpVersionRequirements['passed'];
         foreach ($requiredPhpExtensions as $requiredPhpExtension) {
-            if($requiredPhpExtension['passed'] === false) {
+            if ($requiredPhpExtension['passed'] === false) {
                 $installable = false;
                 continue;
             }
