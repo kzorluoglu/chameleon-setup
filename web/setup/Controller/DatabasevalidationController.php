@@ -3,13 +3,15 @@
 class DatabasevalidationController extends BaseController implements PageControllerInterface
 {
 
+    /**
+     * @throws JsonException
+     */
     public function index(): void
     {
         $connected = false;
         $error = '';
 
-        $this->setSessionDatabaseInformation($this->request);
-        $databaseInformation = $this->getDatabaseInformation();
+        $databaseInformation = $this->getDatabaseInformation($this->request);
 
         if ($_POST) {
             $dbConnection = $this->validateDatabaseConnection();
@@ -26,12 +28,14 @@ class DatabasevalidationController extends BaseController implements PageControl
         }
 
 
-        $this->render('databasevalidation', [
+        header("Access-Control-Allow-Origin: *");
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode([
             'dbConnection' => $dbConnection ?? false,
             'databaseInformation' => $databaseInformation,
             'connected' => $connected,
             'error' => $error,
-        ]);
+        ], JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);
     }
 
     /**
@@ -41,51 +45,27 @@ class DatabasevalidationController extends BaseController implements PageControl
     {
         try {
             return $this->getPDO(
-                $this->request['mysql_host'],
-                $this->request['mysql_port'],
-                $this->request['mysql_database_name'],
-                $this->request['mysql_username'],
-                $this->request['mysql_password'],
+                $this->request['hostname'],
+                $this->request['port'],
+                $this->request['name'],
+                $this->request['username'],
+                $this->request['password'],
             );
         } catch (\PDOException $e) {
             return $e;
         }
     }
 
-    /** @return null|array */
-    private function hasSessionDatabaseInformation(): ?array
+    private function getDatabaseInformation(array $request)
     {
-        return $_SESSION['mysql_information'] ?? null;
-    }
-
-    private function setSessionDatabaseInformation(array $request): void
-    {
-        $_SESSION['mysql_information'] =
-            [
-                'mysql_host' => $request['mysql_host'],
-                'mysql_port' => $request['mysql_port'],
-                'mysql_database_name' => $request['mysql_database_name'],
-                'mysql_username' => $request['mysql_username'],
-                'mysql_password' => $request['mysql_password'],
-                'install_demo_data' => $request['install_demo_data'] ?? false,
-            ];
-    }
-
-    private function getDatabaseInformation()
-    {
-        $databaseInformation = $this->hasSessionDatabaseInformation();
-
-        if ($databaseInformation !== null) {
-            return $databaseInformation;
-        }
 
         return [
-            'mysql_host' => '',
-            'mysql_port' => '',
-            'mysql_database_name' => '',
-            'mysql_username' => '',
-            'mysql_password' => '',
-            'install_demo_data' => '',
+            'hostname' => $request['hostname'],
+            'port' => $request['port'],
+            'name' => $request['name'],
+            'username' => $request['username'],
+            'password' => $request['password'],
+            'install_demo_data' => $request['install_demo_data'] ?? false,
         ];
     }
 }

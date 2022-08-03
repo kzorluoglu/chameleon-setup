@@ -14,11 +14,6 @@ class ComposerinstallController extends BaseController implements PageController
 
         $composerInstallCommand = $this->getComposerInstallCommand();
 
-        if (isset($this->request['debug']) && $this->request['debug'] === 'true') {
-            $this->echoEventData("Debug mode is on!");
-            $composerInstallCommand = "ping -c 5 google.com";
-        }
-
         $this->echoEventData($composerInstallCommand);
 
         $proc = popen($composerInstallCommand, 'r');

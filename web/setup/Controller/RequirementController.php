@@ -8,6 +8,9 @@ class RequirementController extends BaseController implements PageControllerInte
         'mbstring', 'mysqli', 'pdo_mysql', 'zip', 'tidy'];
 
 
+    /**
+     * @throws JsonException
+     */
     public function index(): void
     {
         $phpVersionRequirements = [
@@ -26,7 +29,7 @@ class RequirementController extends BaseController implements PageControllerInte
             'phpVersionRequirements' => $phpVersionRequirements,
             'installable' => $installable,
             'system_requirements' => $installedPhpExtensions,
-        ], JSON_PRETTY_PRINT);
+        ], JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);
         exit;
     }
 

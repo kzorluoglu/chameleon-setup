@@ -40,7 +40,6 @@ export default class Requirements extends Component {
                 return res.json()
             })
             .then((result) => {
-                    console.log()
                     this.setState({
                         isLoaded: true,
                         phpVersionRequirements: result.phpVersionRequirements,

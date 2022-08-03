@@ -13,8 +13,8 @@ class BaseController
     public function render($view, $data = []): void
     {
         $data['full_url'] = $this->getFullUrl();
-        extract($data);
-        require_once SetupTool::SETUP_TOOL_PATH.'/View/' . $view . '.php';
+        extract($data, EXTR_OVERWRITE);
+        require_once SetupTool::SETUP_TOOL_PATH . '/View/' . $view . '.php';
     }
 
     protected function getPDO(string $hostname, string $port, string $databaseName, string $username, string $password): PDO
@@ -40,11 +40,12 @@ class BaseController
         exit;
     }
 
-    public function echoEventData($datatext) {
-        echo "data: ".implode("\ndata: ", explode("\n", $datatext))."\n\n";
+    public function echoEventData($datatext): void
+    {
+        echo "data: " . implode("\ndata: ", explode("\n", $datatext)) . "\n\n";
     }
 
-    private function getFullUrl()
+    private function getFullUrl(): string
     {
         return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[SCRIPT_NAME]";
     }
