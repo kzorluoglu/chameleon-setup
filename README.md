@@ -40,7 +40,7 @@ Chameleon Shop can be installed and configured using a web-based setup.
 For setup, go to `www.yourshopdomain.com/setup` and follow the steps from the setup wizard.
 **Don't forget to update `www.yourshopdomain.com` with your URL.**
 
-##### Method 1: Composer
+##### Method 2: Composer
 TBA
 
 License
