@@ -32,3 +32,6 @@ web/chameleon/outbox/static/js/*
 !web/chameleon/outbox/static/less/
 web/chameleon/outbox/static/less/*
 !web/chameleon/outbox/static/less/.gitkeep
+
+
+.idea
